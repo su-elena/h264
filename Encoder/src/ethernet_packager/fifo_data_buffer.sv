@@ -34,9 +34,9 @@ module fifo_data_buffer (
         .addra(write_counter),
         .addrb(read_counter),
         .dina(byte_in),
-        .dinb(),
+        .dinb(0),
         .clka(clk),
-        .wea(~buffer_full && buffer_ready),
+        .wea(1),
         .web(0),
         .ena(1),
         .enb(1),
@@ -55,6 +55,7 @@ module fifo_data_buffer (
     always_ff @(posedge clk) begin
         if (rst) begin
            state <= IDLE;
+           write_counter <= 1'b0;
            buffer_ready <= 1'b1;
            hardcoded <= {56'h55555555555555, 8'hD5, dest_addr, source_addr, ethertype};
         end
@@ -66,7 +67,6 @@ module fifo_data_buffer (
         end else if (~valid_in) begin
             //disable writes
             buffer_ready <= 1'b0;
-            write_counter <= 0;
         end
 
         if (state == IDLE) begin
