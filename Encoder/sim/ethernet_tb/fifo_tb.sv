@@ -31,7 +31,7 @@ module fifo_tb();
         rst = 1'b1;
         #20;
         rst = 1'b0;
-        axiiv = 1'b0;
+        valid_in = 1'b0;
         #20;
         for (int i = 0; i < 84; i = i + 1) begin
             byte_in = 8'b11010010;
@@ -40,7 +40,7 @@ module fifo_tb();
             #20;
         end
         #20;
-        axiiv = 1'b0;
+        valid_in = 1'b0;
         #60;
         #200;
         $display("Finishing sim"); 
