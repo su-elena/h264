@@ -88,13 +88,26 @@ module fifo_data_buffer (
                 state <= DATA_OUT;
             end
         end else if (state == DATA_OUT) begin
-            if (read_counter == write_counter) begin
+            if (read_counter < write_counter) begin
+                if (dibit_counter < 3) begin
+                    dibit_counter <= dibit_counter + 1;
+                    axiod <= byte_out[7:6];
+                    byte_out <= {byte_out[5:0], byte_out[7:6]};
+                end else if (dibit_counter == 3) begin
+                    dibit_counter <= 0;
+                    axiod <= byte_out[7:6];
+                    byte_out <= {byte_out[5:0], byte_out[7:6]};
+                end
+            end
+            else if (read_counter == write_counter) begin
                 if (dibit_counter < 3) begin
                     dibit_counter <= dibit_counter + 1;
                     axiod <= byte_out[7:6];
                     byte_out <= {byte_out[5:0], byte_out[7:6]};
                 end else if (dibit_counter == 3) begin
                     state <= IDLE;
+                    axiod <= byte_out[7:6];
+                    byte_out <= {byte_out[5:0], byte_out[7:6]};
                     buffer_ready <= 1'b1;
                 end
             end
