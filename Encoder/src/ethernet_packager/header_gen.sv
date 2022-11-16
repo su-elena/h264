@@ -32,7 +32,6 @@ module header_gen (
         end else if (counter < 40) begin
             axiiv <= 1'b1;
             counter <= counter + 1;
-            buffer 
         end else if (counter == 40) begin
             axiov <= 1'b1;
         end

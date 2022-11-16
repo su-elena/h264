@@ -20,6 +20,8 @@ module transmit(
         if (rst) begin
             state <= IDLE;
         end
+
+        if (state == )
     end
 endmodule
 
