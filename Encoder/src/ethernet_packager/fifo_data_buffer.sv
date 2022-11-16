@@ -80,12 +80,14 @@ module fifo_data_buffer (
             end
         end else if (state == HARDCODED_OUT) begin
             axiov <= 1'b1;
-            if (initial_count < 88) begin
+            if (initial_count < 87) begin
                 initial_count <= initial_count + 1;
                 hardcoded <= {hardcoded[173:0], hardcoded[175:174]};
                 axiod <= hardcoded[175:174];
-            end else if (initial_count == 88) begin
+            end else if (initial_count == 87) begin
                 initial_count <= 0;
+                hardcoded <= {hardcoded[173:0], hardcoded[175:174]};
+                axiod <= hardcoded[175:174];
                 state <= DATA_OUT;
             end
         end else if (state == DATA_OUT) begin

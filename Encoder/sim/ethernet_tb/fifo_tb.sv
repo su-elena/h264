@@ -42,7 +42,7 @@ module fifo_tb();
         #20;
         valid_in = 1'b0;
         #60;
-        #200;
+        #11200;
         $display("Finishing sim"); 
         $finish;
     end

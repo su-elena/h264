@@ -1,28 +1,21 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-module transmit(
+module transmit (
     input wire clk,
-    input wire rst,
-    output logic axiov,
-    output logic [1:0] axiod
+    input wire btnc,
+    output logic eth_rstn,
+    output logic eth_txen,
+    output wire eth_refclk, 
+    output logic [1:0] eth_txd
 );
-
-    logic [31:0] cksum_buffer;
-
-    typedef enum {IDLE, PREAMBLE, HEADER, DATA, FCS} states;
-    states prev_state, state, next_state;
-    logic [6:0] counter;
+    bitorder bitorder();
+    fifo_data_buffer buffer();
 
     always_ff @(posedge clk) begin
-        prev_state <= state;
-
-        if (rst) begin
-            state <= IDLE;
-        end
-
-        if (state == )
+        
     end
+
 endmodule
 
-`default nettype wire
+`default_nettype wire
