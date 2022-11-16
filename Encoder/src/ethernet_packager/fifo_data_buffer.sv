@@ -48,7 +48,7 @@ module fifo_data_buffer (
         .doutb(data_out)
     );
     always_comb begin
-        if (dibit_counter == 3) begin
+        if (dibit_counter == 0) begin
             byte_out = data_out; 
         end
     end
