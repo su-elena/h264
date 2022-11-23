@@ -33,8 +33,8 @@ module fifo_tb();
         rst = 1'b0;
         valid_in = 1'b0;
         #20;
-        for (int i = 0; i < 84; i = i + 1) begin
-            byte_in = 8'b11010010;
+        for (int i = 0; i < 3; i = i + 1) begin
+            byte_in = 8'hD2;
             valid_in = 1'b1;
             $display("%b           %b        %b       %d", axiov, axiod, valid_in, byte_in); 
             #20;
@@ -42,6 +42,13 @@ module fifo_tb();
         #20;
         valid_in = 1'b0;
         #60;
+        for (int i = 0; i < 2; i = i + 1) begin
+            byte_in = 8'hC5;
+            valid_in = 1'b1;
+            $display("%b           %b        %b       %d", axiov, axiod, valid_in, byte_in); 
+            #20;
+        end
+        valid_in = 1'b0;
         #11200;
         $display("Finishing sim"); 
         $finish;

@@ -113,6 +113,7 @@ module fifo_data_buffer (
                     axiod <= byte_out[7:6];
                     byte_out <= {byte_out[5:0], byte_out[7:6]};
                     buffer_ready <= 1'b1;
+                    transmit_flag <= 1'b0;
                 end
             end
         end
