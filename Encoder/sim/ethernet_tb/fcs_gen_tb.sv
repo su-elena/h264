@@ -50,10 +50,6 @@ module fcs_gen_tb();
         $display("Finishing sim"); 
         $finish;
     end
-
-
-
-    
 endmodule
 
 `default_nettype wire
