@@ -7,7 +7,7 @@
 module fifo_data_buffer (
     input wire clk, rst, valid_in,
     input wire [7:0] byte_in,
-    output logic axiov,
+    output logic axiov, buffer_done,
     output logic [1:0] axiod
 );
 
@@ -71,6 +71,7 @@ module fifo_data_buffer (
 
         if (state == IDLE) begin
             // no transmission
+            buffer_done <= 1'b0;
             axiov <= 1'b0;
             initial_count <= 0;
             read_counter <= 1'b0;
@@ -111,6 +112,7 @@ module fifo_data_buffer (
                 end else if (dibit_counter == 3) begin
                     state <= IDLE;
                     axiod <= byte_out[7:6];
+                    buffer_done <= 1'b1;
                     byte_out <= {byte_out[5:0], byte_out[7:6]};
                     buffer_ready <= 1'b1;
                     transmit_flag <= 1'b0;
